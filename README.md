@@ -52,7 +52,78 @@ end
 
 ```
 
-```
+```ruby
+schedule = IceCube::Schedule.new
+schedule.add_recurrence_rule(
+  IceCube::Rule.yearly.day_of_month(13).day(:friday).month_of_year(:october)
+)
+
+schedule = IceCube::Schedule.new(now = Time.now) do |s|
+  s.add_recurrence_rule(IceCube::Rule.daily.count(4))
+  s.add_exception_time(now + 1.day)
+end
+
+occurrences = schedule.occurrences(end_time)
+occurrences = schedule.all_occurrences
+schedule.occurs_at?(now + 1.day)
+schedule.occurs_at?(now + 2.days)
+schedule.occurs_on?(Date.today)
+schedule.occurs_between?(now, now + 30.days)
+schedule.occurs_between?(now + 4.days, now + 30.days)
+schedule.first(2)
+schedule.first
+schedule.last(2)
+schedule.last
+
+schedule.next_occurrence(from_time)
+schedule.next_occurrence(4, from_time)
+schedule.remaining_occurrences
+
+schedule.previous_occurrence(from_time)
+schedule.previous_occurrences(4, from_time)
+
+schedule.next_occurrences(4, from_time, :spans => true)
+schedule.occurrences_between(from_time, to_time, :spans => true)
+
+schedule = IceCube::Schedule.new(now, :duration => 3600)
+schedule.add_recurrence_rule IceCube::Rule.daily
+schedule.occurring_at?(now + 1800)
+schedule.occurring_between?(t1, t2)
+
+schedule = IceCube::Schedule.new(start = Time.now, :end_time => start + 3600)
+schedule.add_recurrence_rule IceCube::Rule.daily
+schedule.occurring_at?(start + 3599)
+schedule.occuring_at?(start + 3600)
+
+schedule = IceCube::Schedule.new
+schedule.add_recurrence_rule IceCube::Rule.daily.until(Date.today + 30)
+schedule.each_occurrence { |t| puts t}
+
+yaml = schedule.to_yaml
+IceCube::Schedule.from_yaml(yaml)
+
+hash = schedule.to_hash
+IceCube::Schedule.from_hash(hash)
+
+ical = schedule.to_ical
+IceCube::Schedule.from_ical(ical)
+
+rule = IceCube::Rule.daily(2).day_of_week(:tuesday => [1, -1], :wednesday => [2])
+rule.to_ical
+rule.to_s
+
+schdule.add_recurrence_rule IceCube::Rule.daily
+schedule.add_recurrence_rule IceCube::Rule.daily(3)
+
+schedule.add_recurrence_rule IceCube::Rule.weekly
+schedule.add_recurrence_rule IceCube::Rule.weekly(2).day(:monday, :tuesday)
+schedule.add_recurrence_rule IceCube::Rule.weekly(2).day(1, 2)
+schedule.add_recurrence_rule IceCube::Rule.weekly(1, :monday)
+
+schedule.add_recurrence_rule IceCube::Rule.monthly.day_of_month(1, -1)
+schedule.add_recurrence_rule IceCube::Rule.monthly(2).day_of_month(15)
+
+
 ```
 
 
