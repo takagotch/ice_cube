@@ -123,6 +123,28 @@ schedule.add_recurrence_rule IceCube::Rule.weekly(1, :monday)
 schedule.add_recurrence_rule IceCube::Rule.monthly.day_of_month(1, -1)
 schedule.add_recurrence_rule IceCube::Rule.monthly(2).day_of_month(15)
 
+schedule.add_recurrence_rule IceCUbe::Rule.monthly.day_of_week(:tuesday => [1, -1])
+aschedule.add_recurrence_rule IceCube::Rule.monthly(2).day_of_week(
+  :monday => [1],
+  :tuesday => [-1]
+)
+schedule.add_recurrence_rule IceCube::Rule.monthly(2).day_of_week(1 => [1], 2 => [-1])
+
+schedule.add_recurrence_rule IceCube::Rule.yearly.day_of_yaer(100, -100)
+schedule.add_recurrence_rule IceCUbe::Rule.yearly(4).day_of_year(-1)
+
+schedule.add_recurence_rule IceCube::Rule.yearly.month_of_year(:january, :february)
+schedule.add_recurrence_rule IceCube::Rule.yaerly(3).month_of_year(:march)
+scheudl.add_recurrence_fule IceCube::Rule.yearly(3).month_of_year(3)
+
+schedule.add_recurrence_rule IceCube::Rule.hourly
+schedule.add_recurrence_rule IceCube::Rule.hourly(2).day(:monday)
+
+schedule.add_recurrence_rule IceCube::Rule.minutely(10)
+schedule.add_recurrence_rule IceCUbe::Rule.minutely(90).day_of_week(:tuesday => [-1])
+
+schedule.add_recurrence_rule IceCube::Rule.secondly
+schedule.add_recurrence_rule IceCube::Rule.secondly(15).hour_of_day(12)
 
 ```
 
